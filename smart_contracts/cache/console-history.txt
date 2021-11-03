@@ -1,0 +1,169 @@
+await raffle.getTickets();
+await raffle.update('Nike Dunk SB Low (Red)', false, 100000000000000, 5);
+await raffle.reset();
+await raffle.ticketLimit();
+await raffle.getTicketCount();
+await raffle.ticketLimit();
+await raffle.setTicketLimit(7);
+await raffle.ticketLimit();
+clear()
+await raffle.ticketLimit();
+await raffle.setTicketLimit(7);
+await raffle.getTicketCount();
+await raffle.name();
+await raffle.update('Nike SB Low (Red)', false, 100000000000000, 10);
+await raffle.ticketLimit()
+await raffle.getTicketLimit()
+await raffle.getTicketCount()
+await raffle.getTickets()
+const raffle = await Raffle.attach('0x66116e4Ed7BE48b095613863CD4A2b4DC924DB64')
+const Raffle = await ethers.getContractFactory('Raffle')
+await raffle.getTickets();
+await raffle.tickets();
+const raffle = await Raffle.attach('0x66116e4Ed7BE48b095613863CD4A2b4DC924DB64')
+const Raffle = await ethers.getContractFactory('Raffle')
+await raffle.isClosed()
+await raffle.name()
+const raffle = await Raffle.attach('0x2239F193397f46e2d9628Aebb3C0CDD0D73Bde50')
+const Raffle = await ethers.getContractFactory('Raffle')
+await raffle.name()
+raffle.name()
+const raffle = await Raffle.attach('0x2239F193397f46e2d9628Aebb3C0CDD0D73Bde50')
+const Raffle = await ethers.getContractFactory('Raffle')
+raffle.name()
+await raffle.deployed()
+await raffle.name()
+await raffle.name(
+const raffle = await Raffle.attach('0x2239F193397f46e2d9628Aebb3C0CDD0D73Bde50')
+const Raffle = await ethers.getContractFactory('Raffle')
+await raffle.connect(addr).name();
+await raffle.getTicketCount();
+raffle
+await raffle.name();
+const raffle = await Raffle.attach('0x2239F193397f46e2d9628Aebb3C0CDD0D73Bde50')
+const Raffle = await ethers.getContractFactory('Raffle')
+await raffle.connect(addr).setName('Nike SB Dunk Low (Red)')
+await raffle.isClosed();
+await raffle.connect(addr).setIsClosed(true);
+await raffle.connect(addr).setTicketLimit(2);
+await raffle.ticketPrice();
+await raffle.connect(addr).setTicketPrice(10000000000);
+await raffle.connect(addr).name()
+await raffle.connect(addr).name();
+await raffle.connect(addr).reset();
+await raffle.name();
+await raffle.connect(addr).name();
+await raffle.connect(addr).setName('John Cena');
+await raffle.connect(addr).name();
+await raffle.getTickets();
+await raffle.connect(addr).addTicket(4)
+await raffle.owner();
+raffle.owner();
+await raffle.getTickets()
+await raffle.reset()
+await raffle.name()
+await raffle.connect(addr).setName('Nigger Food')
+raffle.connect(addr).setName('Nigger Food')
+raffle.connect(addr1).setName('Nigger Food')
+[addr] = await ethers.getSigners();
+await raffle.getTicket(0)
+raffle.getTicket(0)
+whoami
+await raffle.owner()
+await raffle.name()
+await raffle.setName('Nigger food');
+await raffle.getTickets();
+await raffle.setName('Joe\'s Raffle!');
+await raffle.setName('Joe's Raffle!');
+await raffle.reset();
+raffle.reset();
+const raffle = await Raffle.attach('0x2239F193397f46e2d9628Aebb3C0CDD0D73Bde50')
+const Raffle = await ethers.getContractFactory('Raffle')
+await raffle.getName()
+await raffle.getName('')
+await raffle.setName('Nike SB Dunk Low (Red)')
+await raffle.reset()
+await raffle.getTickets()
+await raffle.getName()
+await raffle.getName('Nike Shoes')
+await raffle.setName('Nike Shoes')
+raffle.setName('Nike Shoes')
+const raffle = await Raffle.attach('0x248CBf05D83FA4E0Cd9A15ce4AF3844a2Ba2D362')
+const Raffle = await ethers.getContractFactory('Raffle')
+await raffle.name()
+await raffle.getName()
+await raffle.getMaxTickets()
+Raffle.abi
+await raffle.maxTickets()
+await raffle.getTickets()
+await raffle.getTicket(0)
+await raffle.isClosed()
+await raffle.getTicketCount()
+await raffle.name({gasLimit: 100000})
+await raffle.name({gasLimit: 10000})
+clear()
+clear
+await raffle.name({gasLimit: 22000})
+await raffle.name({gasLimit: 21000})
+await raffle.name()
+const raffle = await Raffle.attach('0x248CBf05D83FA4E0Cd9A15ce4AF3844a2Ba2D362')
+const Raffle = await ethers.getContractFactory('Raffle')
+await raffle.name()
+await raffle.getTicketCount()
+const raffle = await Raffle.attach('0x248CBf05D83FA4E0Cd9A15ce4AF3844a2Ba2D362')
+const Raffle = await ethers.getContractFactory('Raffle')
+await raffle.getTicketCount()
+await raffle.ticketPrice()
+await raffle.getTicketCount()
+await raffle.name()
+raffle.name()
+const raffle = await Raffle.attach('0x248CBf05D83FA4E0Cd9A15ce4AF3844a2Ba2D362')
+const Raffle = await ethers.getContractFactory('Raffle')
+await raffle.getTickets()
+await raffle.name()
+const raffle = await Raffle.attach('0x248CBf05D83FA4E0Cd9A15ce4AF3844a2Ba2D362')
+const Raffle = await ethers.getContractFactory('Raffle')
+await raffle.isClosed()
+await raffle.name()
+const raffle = await Raffle.attach('0x248CBf05D83FA4E0Cd9A15ce4AF3844a2Ba2D362')
+const Raffle = await ethers.getContractFactory('Raffle')
+await raffle.name()
+await raffle.n()
+await raffle.name()
+await raffle.isClosed()
+const raffle = await Raffle.attach('0x248CBf05D83FA4E0Cd9A15ce4AF3844a2Ba2D362')
+const Raffle = await ethers.getContractFactory('Raffle')
+const raffle = await Raffle.attach('0x248CBf05D83FA4E0Cd9A15ce4AF3844a2Ba2D362')
+raffle
+delete raffle
+raffle
+const raffle = await Raffle.attach('0x248CBf05D83FA4E0Cd9A15ce4AF3844a2Ba2D362')
+Raffle
+const raffle = await Raffle.attach('0x248CBf05D83FA4E0Cd9A15ce4AF3844a2Ba2D362')
+const Raffle = ethers.getContractFactory('Raffle')
+await raffle.name();
+raffle.name();
+raffle.getTicket(0)
+raffle.getTicket()
+raffle.getTicket
+raffle = await Raffle.deploy(raffleName, ticketPrice, maxTickets);
+    let maxTickets = 6;
+    let ticketPrice = 100000000000000;
+let raffleName = 'My Raffle';
+Raffle = await ethers.getContractFactory('Raffle');
+config
+clear();
+mapping(uint => uint);
+mapping(uint => uint) test;
+mapping(uint => uint)  test;
+mapping(uint => uint) public test;
+await raffle.getMaxTickets();
+await raffle.getTickets();
+await raffle.getOwner();
+await raffle.getMaxTickets();
+await raffle.getMaxTickets(0);
+await raffle.getTicket(0);
+await raffle.getName()
+await raflle.getName()
+const raffle = await Raffle.attach('0x248CBf05D83FA4E0Cd9A15ce4AF3844a2Ba2D362');
+const Raffle = await ethers.getContractFactory('Raffle')

@@ -1,0 +1,15 @@
+.App {
+    /* centered buy section */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
+}
+
+.main {
+    margin: 0 0 32px 0;
+}
+
+.view-ticket {
+    width: 100%;
+}
