@@ -1,9 +1,10 @@
-import './ProductDetails.css'
+import './ProductDetails.css';
 
-import { FormControl, InputLabel, MenuItem, Select, Button, Typography } from '@mui/material';
+import { FormControl, InputLabel, MenuItem, Select, Button, Typography, } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { raffle, fetchName, fetchTicketPrice, buyTicket, walletConnected, holdsTicket, fetchIsClosed, } from '../utils/interact';
 import theme from '../static/themes/Theme';
+import ViewTicketModal from './ViewTicketModal';
 
 import shoe from '../static/images/shoe.png';
 import { ethers } from 'ethers';
@@ -27,7 +28,7 @@ const ProductDetails = (props) => {
         if(window.ethereum) {
             window.ethereum.on('accountsChanged', (accounts) => {
                 if (accounts.length > 0) {
-                    setWallet(accounts[0]);
+                    setWallet(accounts[0].toString().toLowerCase());
                 } else {
                     setWallet('');
                     console.log('Connect to Metamask using the "Connect to Wallet" button.');
@@ -53,6 +54,7 @@ const ProductDetails = (props) => {
     }
 
     useEffect(() => {
+        console.log('mounting product details...');
         async function detailsEffect() {
             const name = await fetchName();
             const ticketPrice = await fetchTicketPrice();
@@ -70,7 +72,6 @@ const ProductDetails = (props) => {
 
         async function holdingEffect() {
             const holdingTicket = await holdsTicket();
-            console.log(holdingTicket);
             setHasTicket(holdingTicket);
         }
 
@@ -80,6 +81,8 @@ const ProductDetails = (props) => {
         addWalletListener();
         addNewTicketListener();
         addRaffleCloseListener();
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     useEffect(() => {
@@ -87,7 +90,6 @@ const ProductDetails = (props) => {
             const holdingTicket = await holdsTicket();
             setHasTicket(holdingTicket);
         }
-
         holdingEffect();
     }, [ wallet ]);
 
@@ -126,10 +128,9 @@ const ProductDetails = (props) => {
                 }
             </FormControl>
             {hasTicket ?
-            <Button sx={{ mt: 4 }} className="view-ticket" color="primary" variant="contained" disableElevation onClick={() => console.log('view ticket.')}>
-              VIEW TICKETs
-            </Button>
-            :null }
+            <ViewTicketModal hasTicket={hasTicket} />
+            :null
+            }
         </div>
     );
 }

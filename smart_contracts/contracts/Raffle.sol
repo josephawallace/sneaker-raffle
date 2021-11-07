@@ -50,6 +50,7 @@ contract Raffle {
     function addTicket(uint _size) public payable isLive {
         require(msg.value == ticketPrice);
         bytes memory seed = abi.encodePacked(msg.sender, tickets.length);
+        // seed = abi.encodePacked(seed, block.timestamp);
         Ticket memory ticket = Ticket(keccak256(seed), msg.sender, _size);
         tickets.push(ticket);
         emit NewTicket(msg.sender);

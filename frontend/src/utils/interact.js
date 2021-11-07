@@ -1,7 +1,10 @@
+import axios from 'axios';
 import { ethers } from 'ethers';
 import RaffleJSON from './Raffle.json'
 
 require('dotenv').config();
+
+const baseURL = 'http://localhost:5000/api';
 
 const alchemyAPIKey = process.env.REACT_APP_ALCHEMY_API_KEY;
 const provider = new ethers.providers.AlchemyProvider('ropsten', alchemyAPIKey);
@@ -91,6 +94,12 @@ export const buyTicket = async (size) => {
             const result = await raffleWithSigner.addTicket(size, { gasLimit: 192000, value: ticketPrice,});
             return {address: connection.address, tx: result, status: 'success'}
         } catch(err) {
+            console.log(err);
+        }
+        try {
+            const response = axios.post(`${baseURL}/user/create`, { address: connection.address });
+            console.log(`response.data: ${response.data}`);
+        } catch (err) {
             console.log(err);
         }
     } else {
