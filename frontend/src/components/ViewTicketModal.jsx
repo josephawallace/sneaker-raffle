@@ -27,8 +27,6 @@ const ViewTicketModal = (props) => {
             const connection = await walletConnected();
             if (connection) {
                 try {
-                    console.log(updatedUser);
-                    console.log(updatedUser.email);
                     const response = await axios.put(`${baseURL}/user/${connection.address}/update`, updatedUser);
                     setUser(response.data);
                 } catch (err) {
@@ -62,8 +60,8 @@ const ViewTicketModal = (props) => {
                 let newUserTickets = [];
                 const tickets = await fetchTickets();
                 tickets.forEach((ticket) => {
-                    if(connection.address.toString().toLowerCase() === ticket.holder.toString().toLowerCase()) {
-                        newUserTickets.push(ticket);
+                    if(connection.address.toString().toLowerCase() === ticket.holder.toString().toLowerCase()) { 
+                        newUserTickets.push(ticket); // if the holder address of a ticket in the smart contract matches the current connected address, add it to the user's tickets
                     }
                 });
                 setUserTickets(newUserTickets);
@@ -71,7 +69,6 @@ const ViewTicketModal = (props) => {
                 console.log('Failed to connect to Ethereum wallet.')
             }
         }
-
         fetchUser();
         fetchUserTickets();
         // eslint-disable-next-line react-hooks/exhaustive-deps

@@ -32,8 +32,8 @@ const ProductDetails = (props) => {
         setLoadingMessage('Waiting on confirmation...')
         setIsReady(false);
         const response = await buyTicket(size);
-        if (!response) {
-            setIsReady(true);
+        if (!response) { // buyTicket will not return if the transaction fails
+            setIsReady(true); // loading screen should disappear if the transaction failed
             console.log('Failed to purchase ticket.');
         } else {
             setLoadingMessage('Buying ticket...');
@@ -58,8 +58,8 @@ const ProductDetails = (props) => {
     const addNewTicketListener = () => {
         raffle.on('NewTicket', async (holder) => {
             setHasTicket(await holdsTicket());
-            setIsReady(true);
-            console.log('NewTicketEvent fired.');
+            setIsReady(true); // remove loading screen once the ticket has successfully been added in the contract
+            console.log('NewTicket event fired.');
         });
     };
 
@@ -71,12 +71,11 @@ const ProductDetails = (props) => {
     }
 
     const isRaffleDetailsReady = (name, ticketPrice, status, winner) => {
-        if (raffleDetails.name === name && raffleDetails.ticketPrice === ethers.utils.formatEther(ticketPrice) && raffleDetails.isClosed === status && raffleDetails.winner === winner) {
+        if (raffleDetails.name === name && raffleDetails.ticketPrice === ethers.utils.formatEther(ticketPrice) && raffleDetails.isClosed === status && raffleDetails.winner === winner) { // confirm the state of the component matches the smart contract 
             setIsReady(true);
             console.log('hey')
         } else {
-            console.log(`raffleDetails:\t ${raffleDetails.name} ${raffleDetails.ticketPrice} ${raffleDetails.isClosed} ${raffleDetails.winner}`);
-            console.log(`smart contract:\t ${name} ${ticketPrice} ${status} ${winner}`);
+            console.log('Failed to verify state with the raffle smart contract.');
         }
     };
 
@@ -87,8 +86,8 @@ const ProductDetails = (props) => {
             const ticketPrice = await fetchTicketPrice();
             const status = await fetchIsClosed();
             const winner = await fetchWinner();
-            setRaffleDetails({...raffleDetails, name: name, ticketPrice: ethers.utils.formatEther(ticketPrice), isClosed: status, winner: winner});
-            isRaffleDetailsReady(name, ticketPrice, status, winner);
+            setRaffleDetails({...raffleDetails, name: name, ticketPrice: ethers.utils.formatEther(ticketPrice), isClosed: status, winner: winner}); // set component state to match the smart contract
+            isRaffleDetailsReady(name, ticketPrice, status, winner); // setState does not update state immediately, it adds to a queue. this checks that the state is ready
         }
 
         async function walletEffect() {
@@ -116,15 +115,15 @@ const ProductDetails = (props) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    useEffect(() => {
+    useEffect(() => { // if the wallet changes, check if the new wallet is holding a ticket
         async function holdingEffect() {
             const holdingTicket = await holdsTicket();
             setHasTicket(holdingTicket);
         }
-        holdingEffect();
-    }, [ wallet ]);
+        holdingEffect(); 
+    }, [ wallet ]);  
 
-    useEffect(() => {
+    useEffect(() => { // if any raffle details change, make sure the state is consistent with the smart contract
         async function raffleDetailsLoadingEffect() {
             const name = await fetchName();
             const ticketPrice = await fetchTicketPrice();
@@ -139,7 +138,7 @@ const ProductDetails = (props) => {
 
     return (
         <div className='product-details'>
-            {isReady ? 
+            {isReady ? // don't show the loading screen
             <Container>
             <Typography variant='h4' m={theme.spacing(0, 0, 4, 0)}>{raffleDetails.name}</Typography>
             <img id="shoe-img" src={shoe} alt="Shoe" />
@@ -184,7 +183,7 @@ const ProductDetails = (props) => {
             :null
             }
         </Container>
-        :
+        : // show the loading screen
         <div>
             <img id="loading-gif" src={loadingAnimation} alt="Sneaker loading gif" />
             <Typography className="loading-message" variant="h4">{loadingMessage}</Typography>
