@@ -50,7 +50,7 @@ contract Raffle {
     function addTicket(uint _size) public payable isLive {
         require(msg.value == ticketPrice);
         bytes memory seed = abi.encodePacked(msg.sender, tickets.length);
-        // seed = abi.encodePacked(seed, block.timestamp);
+        seed = abi.encodePacked(seed, block.timestamp);
         Ticket memory ticket = Ticket(keccak256(seed), msg.sender, _size);
         tickets.push(ticket);
         emit NewTicket(msg.sender);
@@ -110,15 +110,19 @@ contract Raffle {
         return tickets;
     }
 
-    function getBiggest() public view returns(bytes32) {
+    function getBiggest() public onlyOwner view returns(bytes32) {
         return biggest;
     }
  
     
     // RESET FUNCTION //
     function reset() public onlyOwner {
-        update('', false, 0, 10);
+        delete name;
+        delete isClosed;
+        delete ticketPrice;
+        delete ticketLimit;
+        delete winner;
         delete tickets;
-        winner = address(0x0);
+        delete biggest;
     }
 }

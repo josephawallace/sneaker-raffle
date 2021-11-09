@@ -1,3 +1,32 @@
+await raffle.update('Nike SB Dunk Low (Red)', false, 100000000000000, 10);
+await raffle.reset();
+await raffle.update('Nike SB Dunk Low (Red)', false, 100000000000000, 10);
+await raffle.reset();
+raffle.reset();
+const raffle = await Raffle.attach('0x66116e4Ed7BE48b095613863CD4A2b4DC924DB64')
+const Raffle = await ethers.getContractFactory('Raffle')
+await raffle.getTicket(1)
+await raffle.getTicket(0)
+await raffle.getTicket(0).id
+await raffle.getBiggest()
+raffle
+await raffle.getTickets()
+await raffle.winner();
+await raffle.name()
+await raffle.update('Nike SB Dunk Red', false, 100000000000000, 2);
+const raffle = await Raffle.attach('0x66116e4Ed7BE48b095613863CD4A2b4DC924DB64')
+const Raffle = await ethers.getContractFactory('Raffle')
+await raffle.ticketLimit()
+raffle.ticketLimit()
+await raffle.setTicketLimit(2)
+await raffle.getTickets()
+await raffle.reset()
+const raffle = await Raffle.attach('0x66116e4Ed7BE48b095613863CD4A2b4DC924DB64')
+const Raffle = await ethers.getContractFactory('Raffle')
+await raffle.getTicketCount();
+await raffle.ticketCount();
+const raffle = await Raffle.attach('0x66116e4Ed7BE48b095613863CD4A2b4DC924DB64')
+const Raffle = await ethers.getContractFactory('Raffle')
 await raffle.getTickets();
 await raffle.update('Nike Dunk SB Low (Red)', false, 100000000000000, 5);
 await raffle.reset();

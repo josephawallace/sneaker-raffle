@@ -49,7 +49,7 @@ export const fetchTicket = async (index) => {
 };
 
 export const fetchTicketCount = async () => {
-    const ticketCount = raffle.ticketCount();
+    const ticketCount = raffle.getTicketCount();
     return ticketCount;
 };
 

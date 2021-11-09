@@ -3,7 +3,7 @@ import './ViewTicketModal.css';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Button, TextField, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material';
-import { walletConnected } from '../utils/interact';
+import { fetchTickets, walletConnected, } from '../utils/interact';
 
 const baseURL = 'http://localhost:5000/api'
 
@@ -12,6 +12,7 @@ const ViewTicketModal = (props) => {
     const [ user, setUser ] = useState({address: '', email: '', phone: '', shippingAddress: ''});
     const [ updatedUser, setUpdatedUser ] = useState(user);
     const [ open, setOpen ] = useState(false);
+    const [ userTickets, setUserTickets ] = useState([])
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -37,7 +38,6 @@ const ViewTicketModal = (props) => {
                 console.log('Failed to connect to Ethereum wallet.');
             }
         }
-
         submitUser();
     };
 
@@ -46,7 +46,6 @@ const ViewTicketModal = (props) => {
     }
 
     useEffect(() => {
-        console.log('mounting view ticket modal...');
         async function fetchUser() {
             const connection = await walletConnected();
             if (connection) {
@@ -56,18 +55,35 @@ const ViewTicketModal = (props) => {
                 console.log('Failed to connect to Ethereum wallet.');
             }
         }
-        fetchUser();
 
+        async function fetchUserTickets() {
+            const connection = await walletConnected();
+            if (connection) {
+                let newUserTickets = [];
+                const tickets = await fetchTickets();
+                tickets.forEach((ticket) => {
+                    if(connection.address.toString().toLowerCase() === ticket.holder.toString().toLowerCase()) {
+                        newUserTickets.push(ticket);
+                    }
+                });
+                setUserTickets(newUserTickets);
+            } else {
+                console.log('Failed to connect to Ethereum wallet.')
+            }
+        }
+
+        fetchUser();
+        fetchUserTickets();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     useEffect(() => {
-        console.log(user);
         if (!user.address) { return; } // if there is no user was loaded into state
         if (!(user.phone || user.email)) {
             setOpen(true);
         }
     }, [user]);
+
 
     return (
         <div>
@@ -75,14 +91,23 @@ const ViewTicketModal = (props) => {
                 VIEW TICKETS
             </Button>
             {/* if the user doesnt have a contact record in the database render below */}
-            {(user.email) ?
-            <Dialog open={open} onClose={handleClose}>
+            {user.email ?
+            <Dialog maxWidth="lg" open={open} onClose={handleClose}>
                 <DialogTitle>Your tickets</DialogTitle>
                 <DialogContent>
-                <DialogContentText>
-                    Ticket details appear here.
-                </DialogContentText>
+                {userTickets.map((ticket, index) => {
+                    return <p key={index}>Ticket {index+1} ID: {ticket.id}</p>
+                })}
                 </DialogContent>
+                <DialogTitle>Winning ticket</DialogTitle>
+                {props.winner ?
+                <DialogContent>{props.winner}</DialogContent>
+                :null
+                }
+                {!props.winner ?
+                <DialogContent>No winning ticket announced.</DialogContent>
+                :null
+                }
             </Dialog>
             :null
             }

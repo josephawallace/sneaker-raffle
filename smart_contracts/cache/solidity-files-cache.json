@@ -1,9 +1,9 @@
 {
   "_format": "hh-sol-cache-2",
   "files": {
-    "/home/jojo/milque/smart_contracts/contracts/Raffle.sol": {
-      "lastModificationDate": 1635881074895,
-      "contentHash": "b2fda2a74f5524a7a754b75f8df4f839",
+    "/home/jojo/sneaker-raffle/smart_contracts/contracts/Raffle.sol": {
+      "lastModificationDate": 1636414950179,
+      "contentHash": "becd0882f582358d3b0802d19d480d45",
       "sourceName": "contracts/Raffle.sol",
       "solcConfig": {
         "version": "0.8.7",
@@ -37,7 +37,7 @@
         "Raffle"
       ]
     },
-    "/home/jojo/milque/smart_contracts/node_modules/hardhat/console.sol": {
+    "/home/jojo/sneaker-raffle/smart_contracts/node_modules/hardhat/console.sol": {
       "lastModificationDate": 1633809335937,
       "contentHash": "cc4777addd464ea56fa35b1c45df0591",
       "sourceName": "hardhat/console.sol",
