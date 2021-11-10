@@ -28,6 +28,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(cors());
 
+app.use(express.static(path.join(__dirname, './client/build')));
+
 app.use('/', indexRouter);
 app.use('/api', apiRouter);
 

@@ -91,7 +91,7 @@ export const buyTicket = async (size) => {
             const signer = web3Provider.getSigner();
             const raffleWithSigner = raffle.connect(signer);
             const ticketPrice = await raffle.ticketPrice();
-            const result = await raffleWithSigner.addTicket(size, { gasLimit: 192000, value: ticketPrice,});
+            const result = await raffleWithSigner.addTicket(size, { value: ticketPrice, gasLimit: 500000 });
             return {address: connection.address, tx: result, status: 'success'}
         } catch(err) {
             console.log(err);

@@ -1,3 +1,45 @@
+await raffle.update('Nike SB Dunk Low (Red)', false, 100000000000000, 20)
+await raffle.reset();
+await raffle.setName('Nike SB Dunk Low (Red)');
+await raffle.name()
+await raffle.name();
+await raffle.setName('Nike SB Dunk Low (Red)');
+await raffle.name();
+await raffle.setName('joe');
+await raffle.name()
+const raffle = await Raffle.attach('0x2b77F1d6e1CD553ccCC44871295E0eAD883CF2EE')
+const Raffle = await ethers.getContractFactory('Raffle')
+await raffle.name()
+await raffle.setName('hey');
+await raffle.name()
+await raffle.setName('hey');
+await raffle.name()
+const raffle = await Raffle.attach('0x2b77F1d6e1CD553ccCC44871295E0eAD883CF2EE')
+const Raffle = await ethers.getContractFactory('Raffle')
+await raffle.name()
+await raffle.owner();
+raffle.owner();
+await raffle.isClosed();
+await raffle.name()
+await raffle.setName('Nike Shoe')
+await raffle.getTickets()
+await raffle.ticketPrice();
+await raffle.setTicketPrice(100000000000000);
+await raffle.owner()
+await raffle.ticketPrice();
+await raffle.setTicketPrice(100000000000000);
+await raffle.setTicketLimit(10);
+await raffle.reset()
+await raffle.ticketLimit()
+await raffle.getTicketLimit()
+await raffle.getTickets()
+await raffle.reset()
+await raffle.getTickets()
+raffle.getTickets()
+const raffle = await Raffle.attach('0x2b77F1d6e1CD553ccCC44871295E0eAD883CF2EE')
+const Raffle = await ethers.getContractFactory('Raffle')
+await raffle.ticketLimit()
+await raffle.setTicketLimit(4)
 await raffle.getWinningTicket()
 await raffle.getTickets()
 await raffle.getWinningTicket()

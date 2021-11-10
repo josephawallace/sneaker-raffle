@@ -2,8 +2,8 @@
   "_format": "hh-sol-cache-2",
   "files": {
     "/home/jojo/sneaker-raffle/smart_contracts/contracts/Raffle.sol": {
-      "lastModificationDate": 1636568592042,
-      "contentHash": "72082734c4c6e3cc01bdd5c7792ecaea",
+      "lastModificationDate": 1636569078452,
+      "contentHash": "b00ad036683daaafa26b8f5e3789e2ca",
       "sourceName": "contracts/Raffle.sol",
       "solcConfig": {
         "version": "0.8.7",
