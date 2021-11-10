@@ -25,9 +25,10 @@
     "mongoose": "^6.0.8",
     "morgan": "~1.9.1",
     "react": "^16.14.0",
-    "react-dom": "^16.14.0"
+    "react-dom": "^16.14.0",
+    "nodemon": "^2.0.15"
   },
   "devDependencies": {
-    "nodemon": "^2.0.13"
+    "nodemon": "^2.0.15"
   }
 }
