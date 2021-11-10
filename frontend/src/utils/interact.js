@@ -9,7 +9,7 @@ const baseURL = 'http://localhost:5000/api';
 const alchemyAPIKey = process.env.REACT_APP_ALCHEMY_API_KEY;
 const provider = new ethers.providers.AlchemyProvider('ropsten', alchemyAPIKey);
 const contractABI = RaffleJSON.abi;
-const contractAddress = '0x66116e4Ed7BE48b095613863CD4A2b4DC924DB64';
+const contractAddress = '0x71338C4a52df72E04B83e8c291d190E82ED518d1';
 
 export const raffle = new ethers.Contract(contractAddress, contractABI, provider);
 

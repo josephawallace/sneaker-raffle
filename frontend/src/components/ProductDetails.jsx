@@ -29,10 +29,9 @@ const ProductDetails = (props) => {
 
     const buyTicketClick = async (size) => {
         if(!size) { return; }
-        setLoadingMessage('Waiting on confirmation...')
+        setLoadingMessage('Waiting...')
         setIsReady(false);
         const response = await buyTicket(size);
-        console.log(`response: ${response}`);
         if (!response) { // buyTicket will not return if the transaction fails
             setIsReady(true); // loading screen should disappear if the transaction failed
             console.log('Failed to purchase ticket.');
