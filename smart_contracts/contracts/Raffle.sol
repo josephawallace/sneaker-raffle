@@ -17,9 +17,6 @@ contract Raffle {
     /// @notice number of tickets available for purchase before the raffle closes
     uint public ticketLimit;
 
-    /// @notice address of the randomly selected raffle winner
-    address public winner;
-
     /// @notice address of the contract owner, capable of making changes to the raffle state
     address public owner;
 
@@ -28,6 +25,9 @@ contract Raffle {
 
     /// @notice array of tickets that have been purchased
     Ticket[] tickets;
+
+    /// @notice ticket of the randomly selected raffle winner
+    Ticket winningTicket;
 
     /// @notice value of the largest ticket id
     bytes32 biggest;
@@ -44,8 +44,8 @@ contract Raffle {
     event NewTicket(address indexed holder);
 
     /// @notice alert of the raffle being closed
-    /// @param winner address of the randomly selected ticket holder
-    event Closed(address indexed winner);
+    /// @param winningTicket address of the randomly selected ticket holder
+    event Closed(Ticket indexed winningTicket);
 
     /// @notice alert that the details of the raffle have changed
     /// @param message description of the changes that have taken place
@@ -92,7 +92,7 @@ contract Raffle {
 
         if (ticket.id > biggest) { // win condition
             biggest = ticket.id;
-            winner = ticket.holder;
+            winningTicket = ticket;
         }
 
         if (tickets.length >= ticketLimit) { // close condition
@@ -108,7 +108,7 @@ contract Raffle {
     function setIsClosed(bool _isClosed) private {
         isClosed = _isClosed;
         if (isClosed) {
-            emit Closed(winner); // make an announcement if the raffle is closed with the current standing winner
+            emit Closed(winningTicket); // make an announcement if the raffle is closed with the current standing winner
         }
     }
 
@@ -142,6 +142,10 @@ contract Raffle {
         return tickets[_index];
     }
 
+    function getWinningTicket() public view returns(Ticket memory) {
+        return winningTicket;
+    }
+
     function getTickets() public view returns(Ticket[] memory) {
         return tickets;
     }
@@ -156,7 +160,7 @@ contract Raffle {
         delete isClosed;
         delete ticketPrice;
         delete ticketLimit;
-        delete winner;
+        delete winningTicket;
         delete tickets;
         delete biggest;
     }

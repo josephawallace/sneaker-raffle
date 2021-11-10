@@ -1,5 +1,4 @@
 import './App.css';
-import loadingAnimation from './static/images/sneaker-loading.gif';
 
 import Header from './components/Header';
 import ProductDetails from './components/ProductDetails';

@@ -81,7 +81,6 @@ const ViewTicketModal = (props) => {
         }
     }, [user]);
 
-
     return (
         <div>
             <Button sx={{ mt: 4 }} className="view-ticket" color="primary" variant="contained" disableElevation onClick={handleClickOpen}>
@@ -97,13 +96,10 @@ const ViewTicketModal = (props) => {
                 })}
                 </DialogContent>
                 <DialogTitle>Winning ticket</DialogTitle>
-                {props.winner ?
-                <DialogContent>{props.winner}</DialogContent>
-                :null
-                }
-                {!props.winner ?
+                {(props.winningTicket && props.isClosed) ?
+                <DialogContent>{props.winningTicket.id}</DialogContent>
+                :
                 <DialogContent>No winning ticket announced.</DialogContent>
-                :null
                 }
             </Dialog>
             :null

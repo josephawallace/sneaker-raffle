@@ -1,3 +1,8 @@
+await raffle.getWinningTicket()
+await raffle.getTickets()
+await raffle.getWinningTicket()
+const raffle = await Raffle.attach('0x2b77F1d6e1CD553ccCC44871295E0eAD883CF2EE')
+const Raffle = await ethers.getContractFactory('Raffle')
 await raffle.update('Nike SB Dunk Low (Red)', false, 100000000000000, 10);
 await raffle.reset();
 await raffle.update('Nike SB Dunk Low (Red)', false, 100000000000000, 10);

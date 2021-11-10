@@ -2,7 +2,7 @@ import './ProductDetails.css';
 
 import { FormControl, InputLabel, MenuItem, Select, Button, Typography, Container, } from '@mui/material';
 import React, { useEffect, useState } from 'react';
-import { raffle, fetchName, fetchTicketPrice, buyTicket, walletConnected, holdsTicket, fetchIsClosed, fetchWinner, connectWallet } from '../utils/interact';
+import { raffle, fetchName, fetchTicketPrice, buyTicket, walletConnected, holdsTicket, fetchIsClosed, fetchWinningTicket, connectWallet } from '../utils/interact';
 import theme from '../static/themes/Theme';
 import ViewTicketModal from './ViewTicketModal';
 
@@ -13,7 +13,7 @@ import { ethers } from 'ethers';
 const ProductDetails = (props) => {
     const [ wallet, setWallet ] = useState('');
     const [ hasTicket, setHasTicket ] = useState(false);
-    const [ raffleDetails, setRaffleDetails ] = useState({ name: '', ticketPrice: 0, isClosed: false, winner: '' });
+    const [ raffleDetails, setRaffleDetails ] = useState({ name: '', ticketPrice: 0, isClosed: false, winningTicket: {}, });
     const [ size, setSize ] = useState('');
     const [ isReady, setIsReady ] = useState(false);
     const [ loadingMessage, setLoadingMessage ] = useState('') 
@@ -64,29 +64,19 @@ const ProductDetails = (props) => {
     };
 
     const addRaffleCloseListener = () => {
-        raffle.on('Closed', async (winner) => {
-            console.log(`Closed event fired with winner: ${winner}`);
-            setRaffleDetails({...raffleDetails, isClosed: true, winner: winner});
+        raffle.on('Closed', async (winningTicket) => {
+            console.log(`Closed event fired with winning ticket ID: ${winningTicket.id}`);
+            setRaffleDetails({...raffleDetails, isClosed: true, winningTicket: winningTicket});
         });
     }
 
-    const isRaffleDetailsReady = (name, ticketPrice, status, winner) => {
-        if (raffleDetails.name === name && raffleDetails.ticketPrice === ethers.utils.formatEther(ticketPrice) && raffleDetails.isClosed === status && raffleDetails.winner === winner) { // confirm the state of the component matches the smart contract 
-            setIsReady(true);
-        } else {
-            console.log('Failed to verify state with the raffle smart contract.');
-        }
-    };
-
     useEffect(() => {
-        console.log('mounting product details...');
         async function detailsEffect() {
             const name = await fetchName();
             const ticketPrice = await fetchTicketPrice();
             const status = await fetchIsClosed();
-            const winner = await fetchWinner();
-            setRaffleDetails({...raffleDetails, name: name, ticketPrice: ethers.utils.formatEther(ticketPrice), isClosed: status, winner: winner}); // set component state to match the smart contract
-            isRaffleDetailsReady(name, ticketPrice, status, winner); // setState does not update state immediately, it adds to a queue. this checks that the state is ready
+            const winningTicket = await fetchWinningTicket();
+            setRaffleDetails({...raffleDetails, name: name, ticketPrice: ethers.utils.formatEther(ticketPrice), isClosed: status, winningTicket: winningTicket}); // set component state to match the smart contract
         }
 
         async function walletEffect() {
@@ -109,8 +99,6 @@ const ProductDetails = (props) => {
         addNewTicketListener();
         addRaffleCloseListener();
 
-        console.log(raffleDetails.name);
-
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
@@ -127,9 +115,11 @@ const ProductDetails = (props) => {
             const name = await fetchName();
             const ticketPrice = await fetchTicketPrice();
             const status = await fetchIsClosed();
-            const winner = await fetchWinner();
-            if (raffleDetails.name === name && raffleDetails.ticketPrice === ethers.utils.formatEther(ticketPrice) && raffleDetails.isClosed === status && raffleDetails.winner === winner) {
+            const winningTicket = await fetchWinningTicket();
+            if (raffleDetails.name === name && raffleDetails.ticketPrice === ethers.utils.formatEther(ticketPrice) && raffleDetails.isClosed === status && raffleDetails.winningTicket.id === winningTicket.id) {
                 setIsReady(true);
+            } else {
+                setRaffleDetails({...raffleDetails, name: name, ticketPrice: ethers.utils.formatEther(ticketPrice), isClosed: status, winningTicket: winningTicket});
             }
         }
         raffleDetailsLoadingEffect();
@@ -172,7 +162,7 @@ const ProductDetails = (props) => {
                 }
             </FormControl>
             {hasTicket ?
-            <ViewTicketModal hasTicket={hasTicket} winner={raffleDetails.winner} />
+            <ViewTicketModal hasTicket={hasTicket} winningTicket={raffleDetails.winningTicket} isClosed={raffleDetails.isClosed} />
             :null
             }
             {!wallet ?

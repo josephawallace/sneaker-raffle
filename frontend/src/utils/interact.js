@@ -9,7 +9,7 @@ const baseURL = 'http://localhost:5000/api';
 const alchemyAPIKey = process.env.REACT_APP_ALCHEMY_API_KEY;
 const provider = new ethers.providers.AlchemyProvider('ropsten', alchemyAPIKey);
 const contractABI = RaffleJSON.abi;
-const contractAddress = '0x71338C4a52df72E04B83e8c291d190E82ED518d1';
+const contractAddress = '0x2b77F1d6e1CD553ccCC44871295E0eAD883CF2EE';
 
 export const raffle = new ethers.Contract(contractAddress, contractABI, provider);
 
@@ -33,9 +33,9 @@ export const fetchTicketLimit = async () => {
     return ticketLimit;
 };
 
-export const fetchWinner = async () => {
-    const winner = raffle.winner();
-    return winner;
+export const fetchWinningTicket = async () => {
+    const winningTicket = raffle.getWinningTicket();
+    return winningTicket;
 };
 
 export const fetchTickets = async () => {

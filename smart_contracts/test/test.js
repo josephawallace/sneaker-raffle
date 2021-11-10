@@ -40,8 +40,10 @@ describe('Raffle', () => {
         await raffle.connect(owner).addTicket(4)
         await raffle.connect(addr1).addTicket(4)
         await raffle.connect(addr2).addTicket(4)
+
+        const winningTicket = await raffle.getWinningTicket();
         
-        expect(await raffle.winner()).to.equal(addr2.address);
+        expect(await winningTicket.holder).to.equal(addr2.address);
     });
 
 });
