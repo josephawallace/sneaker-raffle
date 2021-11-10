@@ -32,6 +32,7 @@ const ProductDetails = (props) => {
         setLoadingMessage('Waiting on confirmation...')
         setIsReady(false);
         const response = await buyTicket(size);
+        console.log(`response: ${response}`);
         if (!response) { // buyTicket will not return if the transaction fails
             setIsReady(true); // loading screen should disappear if the transaction failed
             console.log('Failed to purchase ticket.');
@@ -73,7 +74,6 @@ const ProductDetails = (props) => {
     const isRaffleDetailsReady = (name, ticketPrice, status, winner) => {
         if (raffleDetails.name === name && raffleDetails.ticketPrice === ethers.utils.formatEther(ticketPrice) && raffleDetails.isClosed === status && raffleDetails.winner === winner) { // confirm the state of the component matches the smart contract 
             setIsReady(true);
-            console.log('hey')
         } else {
             console.log('Failed to verify state with the raffle smart contract.');
         }

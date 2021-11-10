@@ -105,7 +105,10 @@ export const buyTicket = async (size) => {
     } else {
         try {
             await connectWallet();
-            buyTicket(size);
+            const result = await buyTicket(size);
+            if (result) {
+                return result;
+            }
         } catch (err) {
             console.log('Failed to connect to Ethereum wallet.');
         }      
